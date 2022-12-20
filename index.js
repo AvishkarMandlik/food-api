@@ -105,6 +105,27 @@ app.get("/delete-food-item-by-id", (req, res) => {
   });
 });
 
+app.get('/food-items-by-category',(req,res)=>{
+const category = req.query.category
+
+ const temp =[]
+
+ db.forEach((item)=>{
+  if(item.category === category){
+    temp.push(item)
+  }
+ })
+
+res.json({
+  success: true,
+  data:temp,
+  message: `food items for  ${category} fetched successfully`
+})
+})
+
+
+
+
 app.listen(5000, () => {
   console.log("listening on port 5000");
 });
